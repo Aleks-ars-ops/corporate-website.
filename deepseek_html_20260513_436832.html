@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>BCorp — корпоративные решения для бизнеса</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #0f172a;
+            color: #f1f5f9;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        :root {
+            --primary-blue: #3B82F6;
+            --primary-gold: #FFD700;
+            --dark-bg: #0f172a;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+            --price-border: #000000;
+        }
+
+        /* Шапка */
+        .header {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-gold);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: white;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #f1f5f9;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-gold);
+        }
+
+        .contact-btn {
+            background: var(--primary-gold);
+            color: #0f172a;
+            padding: 10px 28px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,215,0,0.3);
+        }
+
+        @media (max-width: 900px) {
+            .header-inner { flex-direction: column; }
+            .nav-menu { justify-content: center; gap: 20px; }
+        }
+
+        /* Герой */
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #FFD700, #FBBF24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            max-width: 700px;
+            margin: 0 auto 35px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--primary-gold);
+            color: #0f172a;
+            padding: 14px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255,215,0,0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary-gold);
+            color: var(--primary-gold);
+            padding: 12px 33px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-gold);
+            color: #0f172a;
+            transform: translateY(-3px);
+        }
+
+        /* Статистика */
+        .stats-section {
+            padding: 60px 0;
+            background: #1e293b;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-card {
+            padding: 30px 20px;
+            background: #0f172a;
+            border-radius: 20px;
+            transition: 0.3s;
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-gold);
+        }
+
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--primary-gold);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        @media (max-width: 800px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 500px) { .stats-grid { grid-template-columns: 1fr; } }
+
+        /* Преимущества */
+        .advantages-section {
+            padding: 80px 0;
+            background: #0f172a;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary-gold);
+            margin: 15px auto 0;
+            border-radius: 4px;
+        }
+
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .advantage-card {
+            background: #1e293b;
+            padding: 35px 25px;
+            border-radius: 20px;
+            text-align: center;
+            transition: 0.3s;
+            border: 1px solid var(--border-color);
+        }
+
+        .advantage-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-gold);
+        }
+
+        .advantage-card i {
+            font-size: 2.5rem;
+            color: var(--primary-gold);
+            margin-bottom: 20px;
+        }
+
+        .advantage-card h3 {
+            margin-bottom: 12px;
+            font-size: 1.3rem;
+        }
+
+        .advantage-card p {
+            color: #94a3b8;
+        }
+
+        @media (max-width: 1000px) { .advantages-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 550px) { .advantages-grid { grid-template-columns: 1fr; } }
+
+        /* О компании */
+        .about-section {
+            padding: 80px 0;
+            background: #1e293b;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .about-stat {
+            background: #0f172a;
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .about-stat h4 {
+            font-size: 2rem;
+            color: var(--primary-gold);
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+        /* Услуги — с чёрными рамками для цен */
+        .services-section {
+            padding: 80px 0;
+            background: #0f172a;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .service-card {
+            background: #1e293b;
+            padding: 35px 25px;
+            border-radius: 20px;
+            transition: 0.3s;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-gold);
+        }
+
+        .service-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: #94a3b8;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        /* ЧЁРНАЯ РАМКА ДЛЯ ЦЕН */
+        .service-price {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--primary-gold);
+            margin-bottom: 25px;
+            border: 3px solid #000000;
+            background: #0f172a;
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 12px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .service-card .btn-primary {
+            display: inline-block;
+            padding: 10px 25px;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        @media (max-width: 1000px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .services-grid { grid-template-columns: 1fr; } }
+
+        /* Портфолио */
+        .portfolio-section {
+            padding: 80px 0;
+            background: #1e293b;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .portfolio-item {
+            background: #0f172a;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: 0.3s;
+            border: 1px solid var(--border-color);
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-gold);
+        }
+
+        .portfolio-img {
+            height: 200px;
+            background: linear-gradient(135deg, #3B82F6, #1E3A8A);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .portfolio-info {
+            padding: 25px;
+        }
+
+        .portfolio-info h3 {
+            margin-bottom: 10px;
+        }
+
+        .portfolio-info p {
+            color: #94a3b8;
+            margin-bottom: 10px;
+        }
+
+        .portfolio-tag {
+            display: inline-block;
+            background: var(--primary-gold);
+            color: #0f172a;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 900px) { .portfolio-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 550px) { .portfolio-grid { grid-template-columns: 1fr; } }
+
+        /* Новости */
+        .news-section {
+            padding: 80px 0;
+            background: #0f172a;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .news-card {
+            background: #1e293b;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: 0.3s;
+            border: 1px solid var(--border-color);
+        }
+
+        .news-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-gold);
+        }
+
+        .news-date {
+            padding: 20px 25px 5px;
+            color: var(--primary-gold);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .news-title {
+            padding: 0 25px 10px;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .news-excerpt {
+            padding: 0 25px 20px;
+            color: #94a3b8;
+        }
+
+        .news-link {
+            display: block;
+            padding: 15px 25px;
+            background: #0f172a;
+            text-decoration: none;
+            color: var(--primary-gold);
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .news-link:hover {
+            background: #1e293b;
+        }
+
+        @media (max-width: 900px) { .news-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 550px) { .news-grid { grid-template-columns: 1fr; } }
+
+        /* Дополнительные разделы */
+        .extra-sections {
+            padding: 60px 0;
+            background: #1e293b;
+        }
+
+        .extra-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+
+        .extra-card {
+            background: #0f172a;
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            transition: 0.3s;
+            text-decoration: none;
+            display: block;
+        }
+
+        .extra-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-gold);
+        }
+
+        .extra-card i {
+            font-size: 2rem;
+            color: var(--primary-gold);
+            margin-bottom: 15px;
+        }
+
+        .extra-card h3 {
+            color: #f1f5f9;
+            margin-bottom: 10px;
+        }
+
+        .extra-card p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 900px) { .extra-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 500px) { .extra-grid { grid-template-columns: 1fr; } }
+
+        /* Контакты */
+        .contact-section {
+            padding: 80px 0;
+            background: #0f172a;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info {
+            background: #1e293b;
+            padding: 35px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .contact-info p {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #94a3b8;
+        }
+
+        .contact-info i {
+            width: 30px;
+            color: var(--primary-gold);
+            font-size: 1.2rem;
+        }
+
+        .contact-info a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .contact-info a:hover {
+            color: var(--primary-gold);
+        }
+
+        .map {
+            height: 100%;
+            min-height: 350px;
+            background: #1e293b;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .map iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .contact-form {
+            margin-top: 50px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            background: #1e293b;
+            color: #f1f5f9;
+            font-family: 'Montserrat', sans-serif;
+            transition: 0.3s;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+        }
+
+        .contact-form button {
+            background: var(--primary-gold);
+            color: #0f172a;
+            border: none;
+            padding: 14px 35px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: 0.3s;
+            width: 100%;
+        }
+
+        .contact-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,215,0,0.3);
+        }
+
+        @media (max-width: 900px) {
+            .contact-grid { grid-template-columns: 1fr; }
+            .map { min-height: 300px; }
+        }
+
+        /* Футер */
+        .footer {
+            background: #0f172a;
+            border-top: 1px solid var(--border-color);
+            padding: 50px 0 25px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            color: var(--primary-gold);
+        }
+
+        .footer a {
+            color: #94a3b8;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 12px;
+            transition: 0.3s;
+        }
+
+        .footer a:hover {
+            color: var(--primary-gold);
+            transform: translateX(5px);
+        }
+
+        .footer p {
+            color: #94a3b8;
+            margin-bottom: 12px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        @media (max-width: 800px) {
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 500px) {
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <div class="header-inner">
+            <a href="#" class="logo">B<span>Corp</span></a>
+            <ul class="nav-menu">
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#about">О нас</a></li>
+                <li><a href="#services">Услуги</a></li>
+                <li><a href="#portfolio">Портфолио</a></li>
+                <li><a href="#news">Новости</a></li>
+                <li><a href="#contact">Контакты</a></li>
+            </ul>
+            <a href="#contact" class="contact-btn">Связаться</a>
+        </div>
+    </div>
+</header>
+
+<section class="hero" id="home">
+    <div class="container">
+        <h1>Разрабатываем корпоративные сайты, которые работают на ваш бизнес</h1>
+        <p>Индивидуальные интернет-решения для компаний любого масштаба — от стартапов до крупных корпораций</p>
+        <div class="hero-buttons">
+            <a href="#services" class="btn-primary">Рассчитать проект</a>
+            <a href="#portfolio" class="btn-secondary">Смотреть портфолио</a>
+        </div>
+    </div>
+</section>
+
+<section class="stats-section">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card"><div class="stat-number">5+</div><div class="stat-label">лет на рынке</div></div>
+            <div class="stat-card"><div class="stat-number">120+</div><div class="stat-label">реализованных проектов</div></div>
+            <div class="stat-card"><div class="stat-number">98%</div><div class="stat-label">довольных клиентов</div></div>
+            <div class="stat-card"><div class="stat-number">24/7</div><div class="stat-label">техническая поддержка</div></div>
+        </div>
+    </div>
+</section>
+
+<section class="advantages-section">
+    <div class="container">
+        <h2 class="section-title">Почему бизнес выбирает BCorp</h2>
+        <div class="advantages-grid">
+            <div class="advantage-card"><i class="fas fa-chalkboard-user"></i><h3>Индивидуальный подход</h3><p>Изучаем ваш бизнес, конкурентов и аудиторию</p></div>
+            <div class="advantage-card"><i class="fas fa-file-invoice-dollar"></i><h3>Прозрачная стоимость</h3><p>Фиксированная цена в договоре, без скрытых платежей</p></div>
+            <div class="advantage-card"><i class="fas fa-calendar-check"></i><h3>Соблюдение сроков</h3><p>Чёткое планирование и контроль на всех этапах</p></div>
+            <div class="advantage-card"><i class="fas fa-headset"></i><h3>Поддержка 24/7</h3><p>Техническая поддержка после сдачи проекта</p></div>
+        </div>
+    </div>
+</section>
+
+<section class="about-section" id="about">
+    <div class="container">
+        <h2 class="section-title">О компании BCorp</h2>
+        <div class="about-grid">
+            <div class="about-text">
+                <p>BCorp — молодая динамичная компания, основанная в 2019 году. Мы специализируемся на разработке корпоративных сайтов и интернет-решений для бизнеса.</p>
+                <p>За 5 лет мы реализовали более 120 проектов для клиентов из разных сфер: от небольших стартапов до крупных корпораций. Наша команда — это профессионалы, которые любят своё дело и делают технологии доступными и понятными для каждого бизнеса.</p>
+                <p>Мы работаем по всей России. Наша миссия — помогать компаниям расти через современные веб-технологии.</p>
+            </div>
+            <div class="about-stats">
+                <div class="about-stat"><h4>5 лет</h4><p>успешной работы</p></div>
+                <div class="about-stat"><h4>120+</h4><p>завершённых проектов</p></div>
+                <div class="about-stat"><h4>98%</h4><p>клиентов возвращаются</p></div>
+                <div class="about-stat"><h4>24/7</h4><p>на связи</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="services-section" id="services">
+    <div class="container">
+        <h2 class="section-title">Наши услуги</h2>
+        <div class="services-grid">
+            <div class="service-card"><h3>Разработка корпоративных сайтов</h3><p>Создаём сайты любой сложности под ключ</p><div class="service-price">от 25 000 ₽</div><a href="#contact" class="btn-primary">Заказать</a></div>
+            <div class="service-card"><h3>Интернет-магазины</h3><p>Полнофункциональные магазины с корзиной и оплатой</p><div class="service-price">от 50 000 ₽</div><a href="#contact" class="btn-primary">Заказать</a></div>
+            <div class="service-card"><h3>SEO-продвижение</h3><p>Выводим сайты в топ поисковых систем</p><div class="service-price">от 15 000 ₽/мес</div><a href="#contact" class="btn-primary">Заказать</a></div>
+            <div class="service-card"><h3>Техническая поддержка</h3><p>Обслуживание и развитие проектов</p><div class="service-price">от 5 000 ₽/мес</div><a href="#contact" class="btn-primary">Заказать</a></div>
+            <div class="service-card"><h3>Контекстная реклама</h3><p>Привлекаем целевых клиентов</p><div class="service-price">от 20 000 ₽/мес</div><a href="#contact" class="btn-primary">Заказать</a></div>
+            <div class="service-card"><h3>Брендинг и дизайн</h3><p>Разрабатываем фирменный стиль</p><div class="service-price">от 10 000 ₽</div><a href="#contact" class="btn-primary">Заказать</a></div>
+        </div>
+    </div>
+</section>
+
+<section class="portfolio-section" id="portfolio">
+    <div class="container">
+        <h2 class="section-title">Наши проекты</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-item"><div class="portfolio-img"><i class="fas fa-store"></i></div><div class="portfolio-info"><h3>Мир игрушек</h3><p>Интернет-магазин с каталогом на 5000+ товаров</p><span class="portfolio-tag">результат: +40% продаж</span></div></div>
+            <div class="portfolio-item"><div class="portfolio-img"><i class="fas fa-building"></i></div><div class="portfolio-info"><h3>СтройГарант</h3><p>Корпоративный сайт с калькулятором услуг</p><span class="portfolio-tag">результат: +60% заявок</span></div></div>
+            <div class="portfolio-item"><div class="portfolio-img"><i class="fas fa-graduation-cap"></i></div><div class="portfolio-info"><h3>Умка</h3><p>Образовательный портал для онлайн-обучения</p><span class="portfolio-tag">результат: 5000+ учеников</span></div></div>
+        </div>
+    </div>
+</section>
+
+<section class="news-section" id="news">
+    <div class="container">
+        <h2 class="section-title">Новости и статьи</h2>
+        <div class="news-grid">
+            <div class="news-card"><div class="news-date">15 мая 2024</div><div class="news-title">Как выбрать разработчика сайта</div><div class="news-excerpt">Чек-лист для директора: портфолио, технологии, отзывы...</div><a href="#" class="news-link">Читать →</a></div>
+            <div class="news-card"><div class="news-date">10 мая 2024</div><div class="news-title">Тренды веб-дизайна 2024</div><div class="news-excerpt">Минимализм, микроанимации, тёмная тема и другие тренды...</div><a href="#" class="news-link">Читать →</a></div>
+            <div class="news-card"><div class="news-date">5 мая 2024</div><div class="news-title">SEO-продвижение: с чего начать</div><div class="news-excerpt">Пошаговый план для владельцев бизнеса...</div><a href="#" class="news-link">Читать →</a></div>
+        </div>
+    </div>
+</section>
+
+<section class="extra-sections">
+    <div class="container">
+        <div class="extra-grid">
+            <a href="#" class="extra-card"><i class="fas fa-briefcase"></i><h3>Вакансии</h3><p>Присоединяйтесь к команде BCorp</p></a>
+            <a href="#" class="extra-card"><i class="fas fa-handshake"></i><h3>Партнёрам</h3><p>Выгодные условия сотрудничества</p></a>
+            <a href="#" class="extra-card"><i class="fas fa-newspaper"></i><h3>Пресс-центр</h3><p>Новости компании и пресс-релизы</p></a>
+            <a href="#" class="extra-card"><i class="fas fa-shield-alt"></i><h3>Политика конфиденциальности</h3><p>Защита персональных данных</p></a>
+        </div>
+    </div>
+</section>
+
+<section class="contact-section" id="contact">
+    <div class="container">
+        <h2 class="section-title">Свяжитесь с нами</h2>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <p><i class="fas fa-map-marker-alt"></i> Москва, ул. Тверская, 15, офис 304</p>
+                <p><i class="fas fa-phone"></i> <a href="tel:+79112870694">8-911-287-06-94</a></p>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:info@bcorp.ru">info@bcorp.ru</a></p>
+                <p><i class="fas fa-clock"></i> Пн-Пт: 9:00 – 18:00</p>
+            </div>
+            <div class="map">
+                <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A1a2b3c4d5e6f7g8h9i0j&source=constructor" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="contact-form">
+            <form id="contactForm">
+                <input type="text" placeholder="Ваше имя" id="name" required>
+                <input type="tel" placeholder="Телефон" id="phone" required>
+                <input type="email" placeholder="Email" id="email" required>
+                <textarea placeholder="Сообщение" id="message" rows="5"></textarea>
+                <button type="submit">Отправить заявку</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div><h3>BCorp</h3><p>Надёжные IT-решения для бизнеса</p></div>
+            <div><h3>Навигация</h3><a href="#home">Главная</a><a href="#about">О нас</a><a href="#services">Услуги</a><a href="#portfolio">Портфолио</a></div>
+            <div><h3>Услуги</h3><a href="#services">Разработка сайтов</a><a href="#services">Интернет-магазины</a><a href="#services">SEO-продвижение</a><a href="#services">Техподдержка</a></div>
+            <div><h3>Контакты</h3><a href="tel:+79112870694">+7 (911) 287-06-94</a><a href="mailto:info@bcorp.ru">info@bcorp.ru</a></div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2024 BCorp. Все права защищены.</p></div>
+    </div>
+</footer>
+
+<script>
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('✅ Заявка отправлена! Мы свяжемся с вами в ближайшее время.');
+            contactForm.reset();
+        });
+    }
+</script>
+
+</body>
+</html>
